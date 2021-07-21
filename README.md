@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# Conduit
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+O Conduit é uma aplicação de testes que tenta simular uma aplicação próxima do que seria visto no mundo real. Por meio dele, cria-se um "clone" do site [Medium](https://medium.com), controlando Artigos, Tags, Comentários e Perfis. A interface foi construída utilizando o framework [ReactJS](https://reactjs.org/), StyledComponents, Axios, ReactModal, ReactMarkdown e Typescript.
 
-## Available Scripts
+O desafio original pode ser visto [neste repositório](https://github.com/gothinkster/realworld). Um exemplo prático da aplicação pode ser visto no [próprio site do RealWorld](https://demo.realworld.io/)
 
-In the project directory, you can run:
+## Configurando
 
-### `yarn start`
+Para executarmos a aplicação, será necessário ter NodeJS instalado no computador. Após clonar o repositório, instale os pacotes necessários com o NPM (ou Yarn, se preferir):
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```bash
+npm install
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+ou
 
-### `yarn test`
+yarn
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Para iniciar o projeto, basta utilizar o comando:
 
-### `yarn build`
+```bash
+npm run start
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ou
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+yarn start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+O aplicativo irá iniciar no modo desenvolvimento. Normalmente, a aplicação abrirá automaticamente no seu navegador padrão, caso isto não ocorra, abra o [http://localhost:3000](http://localhost:3000) no seu browser.
 
-### `yarn eject`
+### API
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Por padrão, a aplicação utiliza o [backend](https://github.com/gothinkster/realworld/tree/master/api) disponibilizado pelo próprio desafio.
