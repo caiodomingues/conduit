@@ -330,27 +330,29 @@ const Home: React.FC = () => {
             </div>
           </div>
 
-          <div className="col-md-9">
-            <nav>
-              <ul className="pagination">
-                {[...Array(50)].map((page, index) => (
-                  <li
-                    className={`page-item ${
-                      selectedPage === index ? "active" : ""
-                    }`}
-                    key={index}
-                  >
-                    <button
-                      className="page-link"
-                      onClick={() => handlePage(index)}
+          {!feedActive && (
+            <div className="col-md-9">
+              <nav>
+                <ul className="pagination">
+                  {[...Array(50)].map((page, index) => (
+                    <li
+                      className={`page-item ${
+                        selectedPage === index ? "active" : ""
+                      }`}
+                      key={index}
                     >
-                      {index + 1}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
+                      <button
+                        className="page-link"
+                        onClick={() => handlePage(index + 1)}
+                      >
+                        {index}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </div>
+          )}
         </div>
       </div>
     </div>
