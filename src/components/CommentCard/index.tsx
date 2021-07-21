@@ -14,7 +14,7 @@ function CommentCard({
   article,
   handleCommentDelete,
 }: CommentCardProps) {
-  const [comment, setComment] = useState<Comment>(initialComment);
+  const [comment] = useState<Comment>(initialComment);
 
   const getNumberWithOrdinal = (n: number) => {
     var s = ["th", "st", "nd", "rd"],
