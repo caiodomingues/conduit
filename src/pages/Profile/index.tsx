@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
+import ArticleCard from "../../components/ArticleCard";
 import api from "../../services/api";
 import { Article, UserProps } from "../../types";
 import { useAuth } from "../../utils/AuthContext";
@@ -210,64 +211,7 @@ const Profile: React.FC = () => {
                   <div className="article-preview">Loading articles...</div>
                 ) : (
                   articles.map((article) => (
-                    <div key={article.slug} className="article-preview">
-                      <div className="article-meta">
-                        <Link to={`/@${article.author.username}`}>
-                          <img
-                            alt={`${article.author.image} profile`}
-                            src={
-                              article.author.image ||
-                              "https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"
-                            }
-                          />
-                        </Link>
-                        <div className="info">
-                          <Link
-                            to={`/@${article.author.username}`}
-                            className="author"
-                          >
-                            {article.author.username}
-                          </Link>
-                          <span className="date">
-                            {`${getNumberWithOrdinal(
-                              new Date(article.createdAt).getDate()
-                            )} 
-                          ${new Date(article.createdAt).toLocaleString(
-                            "en-US",
-                            {
-                              month: "long",
-                            }
-                          )}`}
-                          </span>
-                        </div>
-                        <button
-                          onClick={() => handleFavorite(article)}
-                          className={`btn btn${
-                            !article.favorited ? "-outline-primary" : "-primary"
-                          } btn-sm pull-xs-right`}
-                        >
-                          <i className="ion-heart"></i> {article.favoritesCount}
-                        </button>
-                      </div>
-                      <Link
-                        to={`article/${article.slug}`}
-                        className="preview-link"
-                      >
-                        <h1>{article.title}</h1>
-                        <p>{article.description}</p>
-                        <span>Read more...</span>
-                        <ul className="tag-list">
-                          {article.tagList.map((tag) => (
-                            <li
-                              key={tag}
-                              className="tag-default tag-pill tag-outline ng-binding ng-scope"
-                            >
-                              {tag}
-                            </li>
-                          ))}
-                        </ul>
-                      </Link>
-                    </div>
+                    <ArticleCard key={article.slug} initialArticle={article} />
                   ))
                 )}
               </>
@@ -279,64 +223,7 @@ const Profile: React.FC = () => {
                   </div>
                 ) : (
                   likedArticles.map((article) => (
-                    <div key={article.slug} className="article-preview">
-                      <div className="article-meta">
-                        <Link to={`/@${article.author.username}`}>
-                          <img
-                            alt={`${article.author.image} profile`}
-                            src={
-                              article.author.image ||
-                              "https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"
-                            }
-                          />
-                        </Link>
-                        <div className="info">
-                          <Link
-                            to={`/@${article.author.username}`}
-                            className="author"
-                          >
-                            {article.author.username}
-                          </Link>
-                          <span className="date">
-                            {`${getNumberWithOrdinal(
-                              new Date(article.createdAt).getDate()
-                            )} 
-                          ${new Date(article.createdAt).toLocaleString(
-                            "en-US",
-                            {
-                              month: "long",
-                            }
-                          )}`}
-                          </span>
-                        </div>
-                        <button
-                          onClick={() => handleFavorite(article)}
-                          className={`btn btn${
-                            !article.favorited ? "-outline-primary" : "-primary"
-                          } btn-sm pull-xs-right`}
-                        >
-                          <i className="ion-heart"></i> {article.favoritesCount}
-                        </button>
-                      </div>
-                      <Link
-                        to={`/article/${article.slug}`}
-                        className="preview-link"
-                      >
-                        <h1>{article.title}</h1>
-                        <p>{article.description}</p>
-                        <span>Read more...</span>
-                        <ul className="tag-list">
-                          {article.tagList.map((tag) => (
-                            <li
-                              key={tag}
-                              className="tag-default tag-pill tag-outline ng-binding ng-scope"
-                            >
-                              {tag}
-                            </li>
-                          ))}
-                        </ul>
-                      </Link>
-                    </div>
+                    <ArticleCard key={article.slug} initialArticle={article} />
                   ))
                 )}
               </>

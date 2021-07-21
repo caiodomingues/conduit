@@ -2,28 +2,16 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import api from "../../services/api";
-import { Article as ArticleProp, UserProps } from "../../types";
+import { Article as ArticleProp, UserProps, Comment } from "../../types";
 import { useAuth } from "../../utils/AuthContext";
 import ReactMarkdown from "react-markdown";
+import CommentCard from "../../components/CommentCard";
 
 interface Author {
   username: string;
   bio: string;
   image: string;
   following: boolean;
-}
-
-interface Comment {
-  id: number;
-  createdAt: string;
-  updatedAt: string;
-  body: string;
-  author: {
-    username: string;
-    bio: string;
-    image: string;
-    following: boolean;
-  };
 }
 
 const Article: React.FC = () => {
@@ -67,6 +55,20 @@ const Article: React.FC = () => {
     var s = ["th", "st", "nd", "rd"],
       v = n % 100;
     return n + (s[(v - 20) % 10] || s[v] || s[0]);
+  };
+
+  const handleCommentDelete = async (comment: Comment) => {
+    await api
+      .delete(`articles/${id}/comments/${comment.id}`)
+      .then((response) => {
+        let tmp = comments?.filter((com) => {
+          return com.id !== comment.id;
+        });
+        setComments(tmp);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleDelete = async (article: ArticleProp) => {
@@ -130,21 +132,6 @@ const Article: React.FC = () => {
           console.log(err);
         });
     }
-  };
-
-  const handleCommentDelete = async (comment: Comment) => {
-    await api
-      .delete(`articles/${id}/comments/${comment.id}`)
-      .then((response) => {
-        let tmp = comments?.filter((com) => {
-          return com.id !== comment.id;
-        });
-
-        setComments(tmp);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
   const handleComment = async (e: React.SyntheticEvent<HTMLFormElement>) => {
@@ -344,47 +331,12 @@ const Article: React.FC = () => {
             </form>
 
             {comments?.map((comment) => (
-              <div key={comment.id} className="card">
-                <div className="card-block">
-                  <p className="card-text">{comment.body}</p>
-                </div>
-                <div className="card-footer">
-                  <Link
-                    to={`/@${comment.author.username}`}
-                    className="comment-author"
-                  >
-                    <img
-                      alt=""
-                      src={
-                        comment.author.image ||
-                        "https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"
-                      }
-                      className="comment-author-img"
-                    />
-                  </Link>
-                  &nbsp;
-                  <Link
-                    to={`/@${comment.author.username}`}
-                    className="comment-author"
-                  >
-                    {comment.author.username}
-                  </Link>
-                  <span className="date-posted">{`${getNumberWithOrdinal(
-                    new Date(article?.createdAt || "").getDate()
-                  )} ${new Date(article?.createdAt || "").toLocaleString(
-                    "en-US",
-                    {
-                      month: "long",
-                    }
-                  )}`}</span>
-                  <span className="mod-options">
-                    <i
-                      className="ion-trash-a"
-                      onClick={() => handleCommentDelete(comment)}
-                    ></i>
-                  </span>
-                </div>
-              </div>
+              <CommentCard
+                key={comment.id}
+                initialComment={comment}
+                article={article!}
+                handleCommentDelete={() => handleCommentDelete(comment)}
+              />
             ))}
           </div>
         </div>
