@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ArticleCard from "../../components/ArticleCard";
 import api from "../../services/api";
 import { Article, UserProps } from "../../types";
@@ -12,8 +12,7 @@ const Profile: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [likedArticles, setLikedArticles] = useState<Article[]>([]);
   const [likedActive, setLikedActive] = useState<boolean>(false);
-  const { getUser, signed } = useAuth();
-  const history = useHistory();
+  const { getUser } = useAuth();
 
   const { id } = useParams<Record<string, string | undefined>>();
 
