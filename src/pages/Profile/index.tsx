@@ -64,60 +64,6 @@ const Profile: React.FC = () => {
     data();
   }, [getUser, id, user?.username]);
 
-  const handleFavorite = (article: Article) => {
-    if (!signed) {
-      history.push("/login");
-    }
-
-    if (article.favorited) {
-      api
-        .delete(`articles/${article.slug}/favorite`)
-        .then((response) => {
-          article.favorited = false;
-          let tmp = articles.filter((art) => {
-            return art.slug !== article.slug;
-          });
-          tmp.push(response.data.article);
-          tmp.sort((a, b) => {
-            return (
-              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-            );
-          });
-
-          setArticles(tmp);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
-      api
-        .post(`articles/${article.slug}/favorite`)
-        .then((response) => {
-          article.favorited = true;
-          let tmp = articles.filter((art) => {
-            return art.slug !== article.slug;
-          });
-          tmp.push(response.data.article);
-          tmp.sort((a, b) => {
-            return (
-              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-            );
-          });
-
-          setArticles(tmp);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  };
-
-  const getNumberWithOrdinal = (n: number) => {
-    var s = ["th", "st", "nd", "rd"],
-      v = n % 100;
-    return n + (s[(v - 20) % 10] || s[v] || s[0]);
-  };
-
   const handleFollow = (user: UserProps) => {
     if (user.following) {
       api
