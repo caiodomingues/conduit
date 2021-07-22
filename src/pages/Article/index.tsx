@@ -6,6 +6,7 @@ import { Article as ArticleProp, UserProps, Comment } from "../../types";
 import { useAuth } from "../../utils/AuthContext";
 import ReactMarkdown from "react-markdown";
 import CommentCard from "../../components/CommentCard";
+import { sign } from "crypto";
 
 interface Author {
   username: string;
@@ -136,6 +137,10 @@ const Article: React.FC = () => {
 
   const handleComment = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!signed) {
+      history.push("/login");
+    }
 
     await api
       .post(`articles/${id}/comments`, { comment: { body } })

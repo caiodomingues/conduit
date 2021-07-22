@@ -3,6 +3,7 @@ import { Switch, Route, HashRouter, Redirect } from "react-router-dom";
 
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import PrivateRoute from "./components/PrivateRoute";
 
 import Article from "./pages/Article";
 import Login from "./pages/Auth/Login";
@@ -25,18 +26,11 @@ function Routes() {
           {signed ? <Redirect to="/" /> : <Register />}
         </Route>
         <Route path="/login">{signed ? <Redirect to="/" /> : <Login />}</Route>
-        <Route path="/@:id">
-          {signed ? <Profile /> : <Redirect to="/login" />}
-        </Route>
-        <Route path="/settings">
-          {signed ? <Settings /> : <Redirect to="/login" />}
-        </Route>
-        <Route path="/editor/:slug?">
-          {signed ? <Editor /> : <Redirect to="/login" />}
-        </Route>
-        <Route path="/article/:id">
-          {signed ? <Article /> : <Redirect to="/login" />}
-        </Route>
+        <Route path="/@:id" component={Profile} />
+        <Route path="/article/:id" component={Article} />
+
+        <PrivateRoute path="/settings" component={<Settings />} />
+        <PrivateRoute path="/editor/:slug?" component={<Editor />} />
       </Switch>
       <Footer />
     </HashRouter>
